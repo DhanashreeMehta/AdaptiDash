@@ -16,4 +16,4 @@ Optional local server: `python3 -m http.server 8000`, then visit http://localhos
 3. Turn on dark mode in your OS and reload. A suggestion banner appears.
 
 ## Author / AI disclosure
-[Your name]. Code drafted with help from Claude (Anthropic), then reviewed, tested and changed by the author.
+Dhanashree Mehta. Code drafted with help from Claude (Anthropic), then reviewed, tested and changed by the author.
