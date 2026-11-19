@@ -3,31 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AdaptiDash – Static Baseline</title>
+  <title>AdaptiDash – AI-Based Adaptive User Interface</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <!-- Skip link supports keyboard and screen-reader users (WCAG 2.4.1) -->
   <a class="skip-link" href="#workspace">Skip to workspace</a>
 
   <header class="app-header">
     <h1>AdaptiDash</h1>
-    <p class="subtitle">Static baseline: every user sees the same interface</p>
+    <p class="subtitle">An interface that learns how you work</p>
   </header>
 
-  <!-- Two-column layout: no adaptation panel in the baseline -->
-  <main class="layout" style="grid-template-columns: 240px 1fr;">
+  <!-- Suggestion banner: the system proposes, the user decides -->
+  <div id="suggestion" class="suggestion hidden" role="status" aria-live="polite">
+    <span id="suggestion-text"></span>
+    <button id="suggestion-accept" type="button">Apply</button>
+    <button id="suggestion-dismiss" type="button">No thanks</button>
+  </div>
+
+  <main class="layout">
     <nav class="menu" aria-label="Tools">
+      <h2>Suggested for you</h2>
+      <!-- Adaptive partition: filled by the prediction model -->
+      <ul id="adaptive-menu" class="menu-list adaptive"></ul>
+
       <h2>All tools</h2>
-      <!-- Fixed menu: order never changes, no predictions -->
+      <!-- Static partition: never reordered, keeps the UI predictable -->
       <ul id="static-menu" class="menu-list"></ul>
     </nav>
 
     <section id="workspace" class="workspace" tabindex="-1" aria-live="polite">
       <h2 id="workspace-title">Welcome</h2>
-      <p id="workspace-body">Pick a tool from the menu.</p>
+      <p id="workspace-body">Pick a tool. The menu will adapt as you use it.</p>
     </section>
+
+    <aside class="panel" aria-label="Adaptation controls">
+      <h2>Why the UI changed</h2>
+      <ul id="explanations" class="explanations"></ul>
+
+      <h2>Your controls</h2>
+      <label><input type="checkbox" id="toggle-adapt" checked /> Allow menu adaptation</label>
+      <label><input type="checkbox" id="toggle-access" checked /> Allow accessibility adaptation</label>
+      <button id="reset" type="button">Reset learned behavior</button>
+    </aside>
   </main>
 
+  <!-- Load order matters: model -> adapter -> app -->
+  <script src="js/model.js"></script>
+  <script src="js/adapter.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
