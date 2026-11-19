@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdaptiDash – Static Baseline</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to workspace</a>
+
+  <header class="app-header">
+    <h1>AdaptiDash</h1>
+    <p class="subtitle">Static baseline: every user sees the same interface</p>
+  </header>
+
+  <!-- Two-column layout: no adaptation panel in the baseline -->
+  <main class="layout" style="grid-template-columns: 240px 1fr;">
+    <nav class="menu" aria-label="Tools">
+      <h2>All tools</h2>
+      <!-- Fixed menu: order never changes, no predictions -->
+      <ul id="static-menu" class="menu-list"></ul>
+    </nav>
+
+    <section id="workspace" class="workspace" tabindex="-1" aria-live="polite">
+      <h2 id="workspace-title">Welcome</h2>
+      <p id="workspace-body">Pick a tool from the menu.</p>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
