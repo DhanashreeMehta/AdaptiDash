@@ -1,0 +1,85 @@
+/* ==========================================================
+   AdaptiDash styles
+   CSS custom properties let the adapter change sizes and
+   themes at runtime without rewriting any rules.
+   ========================================================== */
+:root {
+  --font-scale: 1;          /* changed by the accessibility adapter */
+  --target-min: 44px;       /* minimum touch-target size (WCAG 2.5.5) */
+  --bg: #f7f7f9;
+  --fg: #1d1d1f;
+  --accent: #0066cc;
+  --card: #ffffff;
+  --transition: 0.25s;
+}
+
+/* Dark theme, applied when the user accepts the suggestion */
+body.theme-dark {
+  --bg: #1c1c1e;
+  --fg: #f2f2f7;
+  --card: #2c2c2e;
+  --accent: #4da3ff;
+}
+
+/* Reduced motion, applied when the user accepts the suggestion */
+body.reduce-motion { --transition: 0s; }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: calc(16px * var(--font-scale));
+  background: var(--bg);
+  color: var(--fg);
+  transition: background var(--transition), color var(--transition);
+}
+
+.skip-link { position: absolute; left: -999px; }
+.skip-link:focus { left: 8px; top: 8px; background: var(--card); padding: 8px; }
+
+.app-header { padding: 1rem 2rem; }
+.subtitle { margin: 0; opacity: 0.75; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 280px;
+  gap: 1rem;
+  padding: 0 2rem 2rem;
+}
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+.menu, .workspace, .panel {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.menu-list { list-style: none; padding: 0; margin: 0 0 1rem; }
+.menu-list button {
+  width: 100%;
+  min-height: var(--target-min);
+  margin: 4px 0;
+  font-size: inherit;
+  text-align: left;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--fg);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: min-height var(--transition);
+}
+.menu-list.adaptive button { background: rgba(0, 102, 204, 0.12); }
+.menu-list button:focus-visible { outline: 3px solid var(--accent); }
+
+.suggestion {
+  margin: 0 2rem 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: #fff4ce;
+  color: #1d1d1f;
+}
+.hidden { display: none; }
+
+.explanations { font-size: 0.9em; padding-left: 1.2rem; }
+.panel label { display: block; margin: 0.5rem 0; }
